@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #F2EFE8;
+  --paper-soft: #EBE7DE;
+  --ink: #121212;
+  --muted: #706D67;
+  --line: #D6D1C8;
+  --blue: #1D3FFF;
+  --antigravity-blue: var(--blue);
+}
+
+@theme inline {
+  --font-display: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-blue: var(--blue);
+}
+
+html {
+  background-color: var(--paper);
+  color: var(--ink);
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  position: relative;
+}
+
+/* Tactile archival paper tooth — ultra-subtle cotton grain */
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background-color: var(--blue);
+  color: var(--paper);
+}
+
+/* Editorial Container — 4-col mobile / 12-col desktop */
+.editorial-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 640px) {
+  .editorial-container {
+    padding-inline: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .editorial-container {
+    padding-inline: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .editorial-container {
+    padding-inline: 52px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .editorial-container {
+    padding-inline: 64px;
+  }
+}
+
+/* Native Modal Top-Layer Scroll Containment */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgba(18, 18, 18, 0.36);
+  backdrop-filter: blur(4px);
+}
+
+/* Accessible Focus Indicators */
+:where(a:any-link, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* Visually hidden utility */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Desktop custom cursor */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
